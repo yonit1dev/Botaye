@@ -1,10 +1,3 @@
-class UserPosition {
-  constructor(latitude, longitude) {
-    this.latitude = latitude;
-    this.longitude = longitude;
-  }
-}
-
 class DOMHelper {
   constructor() {
     this.modalTemplate = document.getElementById("modal-template");
@@ -32,4 +25,4 @@ class DOMHelper {
   }
 }
 
-export { UserPosition, DOMHelper };
+export { DOMHelper };

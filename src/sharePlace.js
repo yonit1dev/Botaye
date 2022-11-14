@@ -1,7 +1,8 @@
-import { UserPosition, DOMHelper } from "./helpers.js";
-import { Modal } from "./modal.js";
-import { Map } from "./map.js";
-import { translateCoords } from "./location.js";
+import { DOMHelper } from "./models/domHelper.js";
+import { UserPosition } from "./models/userPosition.js";
+import { Modal } from "./ui/modal.js";
+import { Map } from "./ui/map.js";
+import { translateCoords, translateLocation } from "./utils/location.js";
 
 // global dom object to help with dom manipulations
 const DOM = new DOMHelper();
@@ -20,7 +21,7 @@ class PlaceLocator {
     this.locateBtn.addEventListener("click", this.locateMeHandler.bind(this));
   }
 
-  pinPointLocation(location) {
+  pinPointLocation(location, address) {
     if (this.map) {
       this.map.render(location);
     } else {
@@ -29,17 +30,13 @@ class PlaceLocator {
   }
 
   findAddressHandler() {
-    const addressEntered = this.address.value;
-
-    if (!addressEntered || addressEntered.trim().length === 0) {
-      alert("Invalid address entered!");
-      return;
-    }
-
-    const loadingModal = new Modal();
-    loadingModal.show();
-
-    translateCoords(addressEntered);
+    // Requires billing to be setup in google maps platform.
+    // const addressEntered = this.address.value;
+    // if (!addressEntered || addressEntered.trim().length === 0) {
+    //   alert("Invalid address entered!");
+    //   return;
+    // }
+    // translateLocation(addressEntered);
   }
 
   locateMeHandler() {
@@ -48,14 +45,15 @@ class PlaceLocator {
 
     navigator.geolocation.getCurrentPosition(
       (foundLocation) => {
-        loadingModal.hide();
-
         const userPosition = new UserPosition(
           foundLocation.coords.latitude,
           foundLocation.coords.longitude
         );
 
-        this.pinPointLocation(userPosition);
+        const address = translateCoords(userPosition);
+        loadingModal.hide();
+
+        this.pinPointLocation(userPosition, address);
       },
       (errorResult) => {
         loadingModal.hide();
