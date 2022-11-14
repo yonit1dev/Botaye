@@ -6,10 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Share My Place</title>
     <link rel="stylesheet" href="./assets/style/app.css" />
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANQpFE8EDzAaOQKGzc8dVrLi2ShQ1u9MA"
+      async
+      defer
+    ></script>
     <script src="./assets/scripts/myPlace.js" defer type="module"></script>
     <script src="./assets/scripts/sharePlace.js" defer type="module"></script>
   </head>
   <body>
+    <template id="modal-template">
+      <div class="overlay"></div>
+      <div class="modal"></div>
+    </template>
+
+    <template id="modal-template-content">
+      <div class="modal-content flex-jc-ac">
+        <h4>Fetchin' Location</h4>
+        <div class="loading-spinner flex-jc-ac">
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+        </div>
+      </div>
+    </template>
+
     <header class="header-text flex-jc-ac">
       <h1>Share a Place!</h1>
     </header>
