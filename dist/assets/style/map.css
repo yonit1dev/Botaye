@@ -1,0 +1,10 @@
+.address-view {
+  max-width: 90%;
+  height: 25rem;
+}
+
+#map{
+    width: 100%;
+    height: 100%;
+}
+

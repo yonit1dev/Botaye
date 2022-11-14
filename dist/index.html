@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Share My Place</title>
+    <link rel="stylesheet" href="./assets/style/app.css" />
+    <script src="./assets/scripts/myPlace.js" defer type="module"></script>
+    <script src="./assets/scripts/sharePlace.js" defer type="module"></script>
+  </head>
+  <body>
+    <header class="header-text flex-jc-ac">
+      <h1>Share a Place!</h1>
+    </header>
+
+    <section class="address-view gray-border">
+      <div id="map" class="flex-jc-ac">
+        <p>Please enter an address or locate yourself!</p>
+      </div>
+    </section>
+
+    <section class="share-link gray-border flex-jc-ac">
+      <input
+        type="text"
+        name="share-link"
+        id="share-link"
+        placeholder="Select a place to generate a link."
+      />
+      <button class="main-btn" id="share-place" disabled>Share Place</button>
+    </section>
+
+    <section class="address gray-border flex-jc-ac">
+      <!-- <form>
+        <label for=""></label>
+        <input type="text" name="" id="" />
+        <button type="submit"></button>
+      </form> -->
+
+      <div class="address-input">
+        <label for="find-input">Address</label>
+        <input
+          type="text"
+          name="find-input"
+          id="find-input"
+          class="gray-border"
+        />
+      </div>
+      <div class="address-buttons">
+        <button class="main-btn" id="find-btn">Find Place</button>
+        <button class="main-btn" id="locate-btn">Get Current Location</button>
+      </div>
+    </section>
+  </body>
+</html>
