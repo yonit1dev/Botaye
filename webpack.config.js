@@ -4,7 +4,7 @@ module.exports = {
   mode: "development",
   entry: {
     myPlace: "./src/myPlace.js",
-    sharePlace: "./src/sharePlace.js",
+    placeLocator: "./src/placeLocator.js",
   },
   output: {
     path: path.resolve(__dirname, "dist/assets/scripts/"),
@@ -13,6 +13,7 @@ module.exports = {
     clean: true,
   },
   devtool: "eval",
+
   //   devServer: {
   //     static: "./dist",
   //   },

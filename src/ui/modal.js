@@ -1,4 +1,4 @@
-import { DOM } from "../sharePlace.js";
+import { DOM } from "../utils/globals.js";
 
 class Modal {
   constructor() {

@@ -1,3 +1,5 @@
+import { Modal } from "../ui/modal";
+
 class DOMHelper {
   constructor() {
     this.modalTemplate = document.getElementById("modal-template");

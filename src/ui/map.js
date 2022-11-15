@@ -1,4 +1,4 @@
-import { DOM } from "../sharePlace.js";
+import { DOM, MAP } from "../utils/globals";
 
 class Map {
   constructor(location) {
@@ -10,20 +10,14 @@ class Map {
   }
 
   render(location) {
-    if (!google) {
-      alert("Couldn't reach out to Google Maps SDK!");
+    if (!MAP) {
+      alert("Couldn't reach out to Google Maps API!");
       return;
     }
 
-    this.map = new google.maps.Map(DOM.map, {
-      center: location,
-      zoom: 16,
-    });
+    this.map = MAP.map(DOM.map, location);
 
-    this.marker = new google.maps.Marker({
-      position: location,
-      map: this.map,
-    });
+    this.marker = MAP.marker(location, this.map);
   }
 }
 
