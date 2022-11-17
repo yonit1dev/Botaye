@@ -41,7 +41,15 @@ class PlaceLocator {
     }
   }
 
-  findPlaceHandler() {}
+  findPlaceHandler() {
+    const address = DOM.findInput.value;
+    if (address && address.trim().length > 0) {
+      MAP.geocoder(address, this.map);
+    } else {
+      alert("Enter a valid address");
+      return;
+    }
+  }
 
   locateUserHandler() {
     MODAL.show();

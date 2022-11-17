@@ -6,8 +6,6 @@ const DOM = new DOMHelper();
 const MODAL = new Modal();
 
 const MAP = {
-  searchManager: undefined,
-
   map(DOMElement, location) {
     return new Microsoft.Maps.Map(DOMElement, {
       credentials:
@@ -16,23 +14,41 @@ const MAP = {
         location.latitude,
         location.longitude
       ),
-      zoom: 17,
+      zoom: 12,
     });
   },
 
-  marker(location, map) {
+  marker(location, map, searchedLocation = undefined, markerColor) {
     const center = new Microsoft.Maps.Location(
       location.latitude,
       location.longitude
     );
     const pushpin = new Microsoft.Maps.Pushpin(center, {
-      title: "You're Here",
+      title: searchedLocation,
       subTitle: "Location",
-      color: "blue",
+      color: markerColor,
     });
     map.entities.push(pushpin);
 
     return pushpin;
+  },
+
+  geocoder(address = undefined, map = undefined) {
+    if (!this.searchManager) {
+      Microsoft.Maps.loadModule("Microsoft.Maps.Search", () => {
+        this.searchManager = new Microsoft.Maps.Search.SearchManager(map);
+        this.geocoder(address, map);
+      });
+    } else {
+      let request = {
+        where: address,
+        callback: (result) => {
+          this.marker(result.results[0].location, map, address, "green");
+        },
+      };
+
+      this.searchManager.geocode(request);
+    }
   },
 };
 
