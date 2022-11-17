@@ -10,23 +10,13 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/app.js":
-/*!********************!*\
-  !*** ./src/app.js ***!
-  \********************/
+/***/ "./src/components/sharedPlace.js":
+/*!***************************************!*\
+  !*** ./src/components/sharedPlace.js ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_placeLocator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/placeLocator */ \"./src/components/placeLocator.js\");\n\n\nnew _components_placeLocator__WEBPACK_IMPORTED_MODULE_0__.PlaceLocator();\n\n\n//# sourceURL=webpack://myplace/./src/app.js?");
-
-/***/ }),
-
-/***/ "./src/components/placeLocator.js":
-/*!****************************************!*\
-  !*** ./src/components/placeLocator.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"PlaceLocator\": () => (/* binding */ PlaceLocator)\n/* harmony export */ });\n/* harmony import */ var _models_userPosition__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/userPosition */ \"./src/models/userPosition.js\");\n/* harmony import */ var _utils_globals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/globals */ \"./src/utils/globals.js\");\n/* harmony import */ var _ui_map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ui/map */ \"./src/ui/map.js\");\n\n\n\n\nclass PlaceLocator {\n  constructor() {\n    this.placeLink = _utils_globals__WEBPACK_IMPORTED_MODULE_1__.DOM.shareInput;\n    this.sharePlaceBtn = _utils_globals__WEBPACK_IMPORTED_MODULE_1__.DOM.shareBtn;\n\n    this.addressField = _utils_globals__WEBPACK_IMPORTED_MODULE_1__.DOM.findInput;\n    this.findPlaceBtn = _utils_globals__WEBPACK_IMPORTED_MODULE_1__.DOM.findBtn;\n    this.locatePlaceBtn = _utils_globals__WEBPACK_IMPORTED_MODULE_1__.DOM.locateBtn;\n\n    this.sharePlaceBtn.addEventListener(\n      \"click\",\n      this.sharePlaceHandler.bind(this)\n    );\n\n    this.findPlaceBtn.addEventListener(\n      \"click\",\n      this.findPlaceHandler.bind(this)\n    );\n    this.locatePlaceBtn.addEventListener(\n      \"click\",\n      this.locateUserHandler.bind(this)\n    );\n  }\n\n  placeMarker(location) {\n    if (this.map) {\n      _utils_globals__WEBPACK_IMPORTED_MODULE_1__.MAP.map(_utils_globals__WEBPACK_IMPORTED_MODULE_1__.DOM.map, location);\n      _utils_globals__WEBPACK_IMPORTED_MODULE_1__.MAP.marker(location, this.map, \"Your Location\", \"blue\");\n    } else {\n      this.map = _utils_globals__WEBPACK_IMPORTED_MODULE_1__.MAP.map(_utils_globals__WEBPACK_IMPORTED_MODULE_1__.DOM.map, location);\n      _utils_globals__WEBPACK_IMPORTED_MODULE_1__.MAP.marker(location, this.map, \"Your Location\", \"blue\");\n    }\n  }\n\n  sharePlaceFormat(coords, address = undefined) {\n    const parsedAddress = `${\n      location.origin\n    }/dist/sharedPlace?address=${encodeURI(address)}&lat=${\n      coords.latitude\n    }&lng=${coords.longitude}`;\n    this.placeLink.value = parsedAddress;\n    this.sharePlaceBtn.disabled = false;\n  }\n\n  sharePlaceHandler() {\n    if (!navigator.clipboard) {\n      alert(\"Your browser doesn't support copying to clipboard\");\n      this.placeLink.value.select();\n    } else {\n      navigator.clipboard.writeText(this.placeLink.value);\n    }\n  }\n\n  findPlaceHandler() {\n    const address = _utils_globals__WEBPACK_IMPORTED_MODULE_1__.DOM.findInput.value;\n    _utils_globals__WEBPACK_IMPORTED_MODULE_1__.MODAL.show();\n    if (address && address.trim().length > 0) {\n      _utils_globals__WEBPACK_IMPORTED_MODULE_1__.MAP.geocoder(address, this.map);\n      _utils_globals__WEBPACK_IMPORTED_MODULE_1__.MODAL.hide();\n    } else {\n      _utils_globals__WEBPACK_IMPORTED_MODULE_1__.MODAL.hide();\n      alert(\"Enter a valid address\");\n      return;\n    }\n  }\n\n  locateUserHandler() {\n    _utils_globals__WEBPACK_IMPORTED_MODULE_1__.MODAL.show();\n\n    navigator.geolocation.getCurrentPosition(\n      (userLocation) => {\n        _utils_globals__WEBPACK_IMPORTED_MODULE_1__.MODAL.hide();\n        const userPosition = new _models_userPosition__WEBPACK_IMPORTED_MODULE_0__.UserPosition(\n          userLocation.coords.latitude,\n          userLocation.coords.longitude\n        );\n\n        this.placeMarker(userPosition);\n        this.sharePlaceFormat(userPosition);\n      },\n      (errorResult) => {\n        _utils_globals__WEBPACK_IMPORTED_MODULE_1__.MODAL.hide();\n\n        alert(\"Couldn't locate you. Enter your location manually!\");\n\n        console.log(new Error(errorResult));\n      }\n    );\n  }\n}\n\n\n\n\n//# sourceURL=webpack://myplace/./src/components/placeLocator.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_globals__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/globals */ \"./src/utils/globals.js\");\n\n\nclass SharedPlace {\n  constructor(coords, address) {\n    this.location = {\n      lat,\n      lng,\n    };\n    this.address;\n  }\n\n  collectParams() {}\n\n  renderSharedPlace() {}\n}\n\n\n//# sourceURL=webpack://myplace/./src/components/sharedPlace.js?");
 
 /***/ }),
 
@@ -37,26 +27,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"DOMHelper\": () => (/* binding */ DOMHelper)\n/* harmony export */ });\n/* harmony import */ var _ui_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ui/modal */ \"./src/ui/modal.js\");\n\n\nclass DOMHelper {\n  constructor() {\n    this.modalTemplate = document.getElementById(\"modal-template\");\n    this.modalTemplateContent = document.getElementById(\n      \"modal-template-content\"\n    );\n\n    this.map = document.getElementById(\"map\");\n\n    this.shareInput = document.getElementById(\"share-link\");\n    this.shareBtn = document.getElementById(\"share-place\");\n\n    this.findInput = document.getElementById(\"find-input\");\n    this.findBtn = document.getElementById(\"find-btn\");\n\n    this.locateBtn = document.getElementById(\"locate-btn\");\n  }\n\n  appendToBody(element, position) {\n    document.body.insertAdjacentElement(position, element);\n  }\n\n  removeFromBody(element) {\n    document.body.removeChild(element);\n  }\n}\n\n\n\n\n//# sourceURL=webpack://myplace/./src/models/domHelper.js?");
-
-/***/ }),
-
-/***/ "./src/models/userPosition.js":
-/*!************************************!*\
-  !*** ./src/models/userPosition.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"UserPosition\": () => (/* binding */ UserPosition)\n/* harmony export */ });\nclass UserPosition {\n  constructor(latitude, longitude) {\n    this.latitude = latitude;\n    this.longitude = longitude;\n  }\n}\n\n\n\n\n//# sourceURL=webpack://myplace/./src/models/userPosition.js?");
-
-/***/ }),
-
-/***/ "./src/ui/map.js":
-/*!***********************!*\
-  !*** ./src/ui/map.js ***!
-  \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Map\": () => (/* binding */ Map)\n/* harmony export */ });\n/* harmony import */ var _utils_globals__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/globals */ \"./src/utils/globals.js\");\n\n\nclass Map {\n  constructor(location) {\n    this.location = {\n      lat: location.latitude,\n      lng: location.longitude,\n    };\n    this.render(this.location);\n  }\n\n  render(location) {\n    if (!_utils_globals__WEBPACK_IMPORTED_MODULE_0__.MAP) {\n      alert(\"Couldn't reach out to Google Maps API!\");\n      return;\n    }\n\n    this.map = _utils_globals__WEBPACK_IMPORTED_MODULE_0__.MAP.map(_utils_globals__WEBPACK_IMPORTED_MODULE_0__.DOM.map, location);\n\n    this.marker = _utils_globals__WEBPACK_IMPORTED_MODULE_0__.MAP.marker(location, this.map);\n  }\n}\n\n\n\n\n//# sourceURL=webpack://myplace/./src/ui/map.js?");
 
 /***/ }),
 
@@ -140,7 +110,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/app.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/components/sharedPlace.js");
 /******/ 	
 /******/ })()
 ;

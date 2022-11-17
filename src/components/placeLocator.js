@@ -1,6 +1,6 @@
-import { UserPosition } from "./models/userPosition";
-import { DOM, MODAL, MAP } from "./utils/globals";
-import { Map } from "./ui/map";
+import { UserPosition } from "../models/userPosition";
+import { DOM, MODAL, MAP } from "../utils/globals";
+import { Map } from "../ui/map";
 
 class PlaceLocator {
   constructor() {
@@ -11,7 +11,10 @@ class PlaceLocator {
     this.findPlaceBtn = DOM.findBtn;
     this.locatePlaceBtn = DOM.locateBtn;
 
-    this.sharePlaceBtn.addEventListener("click", this.sharePlaceHandler);
+    this.sharePlaceBtn.addEventListener(
+      "click",
+      this.sharePlaceHandler.bind(this)
+    );
 
     this.findPlaceBtn.addEventListener(
       "click",
@@ -26,18 +29,29 @@ class PlaceLocator {
   placeMarker(location) {
     if (this.map) {
       MAP.map(DOM.map, location);
-      MAP.marker(location, this.map);
+      MAP.marker(location, this.map, "Your Location", "blue");
     } else {
       this.map = MAP.map(DOM.map, location);
-      MAP.marker(location, this.map);
+      MAP.marker(location, this.map, "Your Location", "blue");
     }
   }
 
+  sharePlaceFormat(coords, address = undefined) {
+    const parsedAddress = `${
+      location.origin
+    }/dist/sharedPlace?address=${encodeURI(address)}&lat=${
+      coords.latitude
+    }&lng=${coords.longitude}`;
+    this.placeLink.value = parsedAddress;
+    this.sharePlaceBtn.disabled = false;
+  }
+
   sharePlaceHandler() {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(this.placeLink.value);
+    if (!navigator.clipboard) {
+      alert("Your browser doesn't support copying to clipboard");
+      this.placeLink.value.select();
     } else {
-      alert("Use a more modern browser to copy link to clipboard");
+      navigator.clipboard.writeText(this.placeLink.value);
     }
   }
 
@@ -66,6 +80,7 @@ class PlaceLocator {
         );
 
         this.placeMarker(userPosition);
+        this.sharePlaceFormat(userPosition);
       },
       (errorResult) => {
         MODAL.hide();

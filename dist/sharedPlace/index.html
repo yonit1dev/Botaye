@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Share My Place</title>
+    <link rel="stylesheet" href="../assets/style/app.css" />
+    <script
+      type="text/javascript"
+      src="http://www.bing.com/api/maps/mapcontrol?key=ApsPvdlfOBGbjg_12qq7n0rx4I7AoJrTjyUinZvqSAsCOLqRhzhG25CBdub5sHWh"
+      async
+      defer
+    ></script>
+    <script src="../assets/scripts/sharedPlace.js" defer type="module"></script>
+  </head>
+  <body>
+    <header class="header-text flex-jc-ac">
+      <h1></h1>
+    </header>
+
+    <section class="address-view gray-border">
+      <div id="map" class="flex-jc-ac"></div>
+    </section>
+
+    <section class="share-link gray-border flex-jc-ac">
+      <button class="main-btn" id="share-place">Share New Place</button>
+    </section>
+  </body>
+</html>

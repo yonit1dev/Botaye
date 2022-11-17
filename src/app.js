@@ -1,3 +1,3 @@
-import { PlaceLocator } from "./placeLocator";
+import { PlaceLocator } from "./components/placeLocator";
 
-const placeLocatorComponent = new PlaceLocator();
+new PlaceLocator();
