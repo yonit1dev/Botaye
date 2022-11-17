@@ -1,6 +1,6 @@
 # MyPlace
  - A bare-bones, minimal JS app for sharing your location and also searching for others location.
- - Built using the Google Maps JavaScript API.
+ - Built using BING Maps SDK.
  - Part of a project for a JS Bootcamp course.
  
  ## Usage
