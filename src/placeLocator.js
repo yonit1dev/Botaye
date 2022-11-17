@@ -23,7 +23,7 @@ class PlaceLocator {
     );
   }
 
-  placeMarker(location, address = undefined) {
+  placeMarker(location) {
     if (this.map) {
       MAP.map(DOM.map, location);
       MAP.marker(location, this.map);
@@ -43,9 +43,12 @@ class PlaceLocator {
 
   findPlaceHandler() {
     const address = DOM.findInput.value;
+    MODAL.show();
     if (address && address.trim().length > 0) {
       MAP.geocoder(address, this.map);
+      MODAL.hide();
     } else {
+      MODAL.hide();
       alert("Enter a valid address");
       return;
     }
