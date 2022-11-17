@@ -1,5 +1,5 @@
 import { UserPosition } from "./models/userPosition";
-import { DOM, MODAL } from "./utils/globals";
+import { DOM, MODAL, MAP } from "./utils/globals";
 import { Map } from "./ui/map";
 
 class PlaceLocator {
@@ -25,9 +25,11 @@ class PlaceLocator {
 
   placeMarker(location, address = undefined) {
     if (this.map) {
-      this.map.render(location);
+      MAP.map(DOM.map, location);
+      MAP.marker(location, this.map);
     } else {
-      this.map = new Map(location);
+      this.map = MAP.map(DOM.map, location);
+      MAP.marker(location, this.map);
     }
   }
 
@@ -65,4 +67,4 @@ class PlaceLocator {
   }
 }
 
-const placeLocator = new PlaceLocator();
+export { PlaceLocator };

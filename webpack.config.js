@@ -4,7 +4,7 @@ module.exports = {
   mode: "development",
   entry: {
     myPlace: "./src/myPlace.js",
-    placeLocator: "./src/placeLocator.js",
+    app: "./src/app.js",
   },
   output: {
     path: path.resolve(__dirname, "dist/assets/scripts/"),

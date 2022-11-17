@@ -27,9 +27,9 @@ function translateLocation(address) {
 
   geocoder.geocode({ address: formatAddress }, function (results, status) {
     if (status == "OK") {
-      console.log(results);
+      // TODO: output formated coordinates
     } else {
-      alert("Error");
+      alert("Error fetching coordinates!");
     }
   });
 }
