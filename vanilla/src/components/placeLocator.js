@@ -1,15 +1,17 @@
 import { UserPosition } from "../models/userPosition";
-import { DOM, MODAL, MAP } from "../utils/globals";
-import { Map } from "../ui/map";
 
 class PlaceLocator {
-  constructor() {
-    this.placeLink = DOM.shareInput;
-    this.sharePlaceBtn = DOM.shareBtn;
+  constructor(domObject, modal, mapElement) {
+    this.DOM = domObject;
+    this.MODAL = modal;
+    this.MAP = mapElement;
 
-    this.addressField = DOM.findInput;
-    this.findPlaceBtn = DOM.findBtn;
-    this.locatePlaceBtn = DOM.locateBtn;
+    this.placeLink = this.DOM.shareInput;
+    this.sharePlaceBtn = this.DOM.shareBtn;
+
+    this.addressField = this.DOM.findInput;
+    this.findPlaceBtn = this.DOM.findBtn;
+    this.locatePlaceBtn = this.DOM.locateBtn;
 
     this.sharePlaceBtn.addEventListener(
       "click",
@@ -28,18 +30,18 @@ class PlaceLocator {
 
   placeMarker(location) {
     if (this.map) {
-      MAP.map(DOM.map, location);
-      MAP.marker(location, this.map, "Your Location", "blue");
+      this.MAP.map(this.DOM.map, location);
+      this.MAP.marker(location, this.map, "Your Location", "blue");
     } else {
-      this.map = MAP.map(DOM.map, location);
-      MAP.marker(location, this.map, "Your Location", "blue");
+      this.map = this.MAP.map(this.DOM.map, location);
+      this.MAP.marker(location, this.map, "Your Location", "blue");
     }
   }
 
-  sharePlaceFormat(coords, address = undefined) {
+  sharePlaceFormat(coords = undefined, address = undefined) {
     const parsedAddress = `${
       location.origin
-    }/dist/sharedPlace?address=${encodeURI(address)}&lat=${
+    }/dist/vanilla/sharedPlace?address=${encodeURI(address)}&lat=${
       coords.latitude
     }&lng=${coords.longitude}`;
     this.placeLink.value = parsedAddress;
@@ -56,24 +58,25 @@ class PlaceLocator {
   }
 
   findPlaceHandler() {
-    const address = DOM.findInput.value;
-    MODAL.show();
+    const address = this.DOM.findInput.value;
+    this.MODAL.show();
     if (address && address.trim().length > 0) {
-      MAP.geocoder(address, this.map);
-      MODAL.hide();
+      this.MAP.geocoder(address, this.map);
+      this.sharePlaceFormat({ address: address });
+      this.MODAL.hide();
     } else {
-      MODAL.hide();
+      this.MODAL.hide();
       alert("Enter a valid address");
       return;
     }
   }
 
   locateUserHandler() {
-    MODAL.show();
+    this.MODAL.show();
 
     navigator.geolocation.getCurrentPosition(
       (userLocation) => {
-        MODAL.hide();
+        this.MODAL.hide();
         const userPosition = new UserPosition(
           userLocation.coords.latitude,
           userLocation.coords.longitude
@@ -83,7 +86,7 @@ class PlaceLocator {
         this.sharePlaceFormat(userPosition);
       },
       (errorResult) => {
-        MODAL.hide();
+        this.MODAL.hide();
 
         alert("Couldn't locate you. Enter your location manually!");
 

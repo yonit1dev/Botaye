@@ -1,8 +1,10 @@
-import { DOM, MAP } from "../utils/globals";
-
 class SharedPlace {
-  constructor(coords, address) {
-    this.url = 
+  constructor(domObj, mapElement, coords, address) {
+    this.DOM = domObj;
+    this.MAP = mapElement;
+
+    this.shareNewPlaceBtn = document.querySelector("button");
+
     this.coords = {
       lat,
       lng,
@@ -10,9 +12,7 @@ class SharedPlace {
     this.address;
   }
 
-  collectParams() {
-
-  }
+  collectParams() {}
 
   renderSharedPlace() {}
 }
