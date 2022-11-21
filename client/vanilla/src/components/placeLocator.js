@@ -72,6 +72,16 @@ class PlaceLocator {
   }
 
   locateUserHandler() {
+    // fetch("http://localhost:7070/", {
+    //   method: "GET",
+    // })
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((value) => {
+    //     console.log(value);
+    //   });
+
     this.MODAL.show();
 
     navigator.geolocation.getCurrentPosition(
