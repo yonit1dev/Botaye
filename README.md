@@ -1,11 +1,17 @@
-# MyPlace
- - A bare-bones, minimal JS app for sharing your location and also searching for others location.
- - Built with plain vanilla js and also Reactjs.
- - Integrates Bing Maps SDK.
- - Part of a project for a JS Bootcamp course.
- 
- ## Usage
- - Clone this repository to your local machine.
- - Make sure you have node and npm installed.
- - Run "npm install" to install the neccessary packages.
- - Either run using a live server, alternatively a bundled webpack server is available by just running "npm run build-serve".
+# Botaye Playground
+A realtime location sharing and chat application.
+
+#### Features
+ - Sharing real-time location with other users.
+ - Tracking real-time location of other users.
+ - Anonymous(Can also be known) messaging features with nearby users.
+ - Sharing trending stories and posts regarding nearby locations.
+
+#### Technologies
+Application and DB Server
+ - PostgreSQL.
+ - PrismaORM.
+ - NestJS(Express).
+
+Client
+ - Flutter and React Native.

@@ -3,4 +3,4 @@ node_modules
 .gitignore
 
 # Public Assets
-public_assets
+publicAssets
